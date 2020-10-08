@@ -1,0 +1,55 @@
+<div class="container-fluid mt-5 pt-5 pb-5">
+  <div class="row">
+    <div class="col-8 mx-auto">
+      <div class="card w-50 login-form mx-auto mt-4">
+        <div class="card-body">
+          <h3 class="card-title text-center">Log In</h3>
+          <div class="card-text">
+            <form id="login-form" [formGroup]="form" (ngSubmit)="sign()">
+              <div class="form-group">
+                <input
+                  type="email"
+                  class="form-control form-control-sm"
+                  placeholder="E-mail Address"
+                  formControlName="email"
+                  [class.is-invalid]="emailNotValid"
+                />
+                <small *ngIf="emailNotValid" class="text-danger"
+                  >Enter a valid e-mail</small
+                >
+              </div>
+              <div class="form-group">
+                <input
+                  type="password"
+                  placeholder="Password"
+                  class="form-control form-control-sm mb-2"
+                  formControlName="password"
+                  [class.is-invalid]="passwordNotValid"
+                />
+                <small *ngIf="passwordNotValid" class="text-danger"
+                  >Password must be between 8 minimum and 20 maximum
+                  characters</small
+                >
+                <a class="mb-3 float-right" routerLink="/recover"
+                  >Forgot password?</a
+                >
+              </div>
+
+              <button
+                id="submit-button"
+                type="submit"
+                class="btn btn-primary btn-block"
+              >
+                Sign in
+              </button>
+
+              <div class="sign-up pt-3">
+                Don't have an account? <a routerLink="/account">Create One</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
