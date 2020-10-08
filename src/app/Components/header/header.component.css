@@ -1,0 +1,16 @@
+nav {
+  padding-bottom: -18px;
+}
+
+h1 {
+  font-size: 26px;
+}
+
+@media (min-width: 768px) {
+  .navbar-brand.abs {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    text-align: center;
+  }
+}
