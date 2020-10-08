@@ -8,6 +8,7 @@ import { HeaderComponent } from './Components/header/header.component';
 import { FooterComponent } from './Components/footer/footer.component';
 import { HomeComponent } from './Views/home/home.component';
 import { LoginComponent } from './Views/login/login.component';
+import { RecoverComponent } from './Views/recover/recover.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { LoginComponent } from './Views/login/login.component';
     FooterComponent,
     HomeComponent,
     LoginComponent,
+    RecoverComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],
