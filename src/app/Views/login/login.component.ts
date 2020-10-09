@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserModel } from '../../Models/user.model';
 import { AuthService } from '../../Services/auth.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -55,12 +56,26 @@ export class LoginComponent implements OnInit {
         control.markAsTouched();
       });
     }
+
+    Swal.fire({
+      allowOutsideClick: false,
+      icon: 'info',
+      text: 'wait please...',
+    });
+    Swal.showLoading();
+
     this.auth.login(this.user).subscribe(
       (resp) => {
         console.log(resp);
+        Swal.close();
       },
       (err) => {
-        console.log(err.error.message);
+        console.log(err.error.error.message);
+        Swal.fire({
+          icon: 'error',
+          title: 'Authentication error',
+          text: err.error.message,
+        });
       }
     );
   }
