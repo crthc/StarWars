@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ValidatorsService } from '../../Services/validators.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UserModel } from '../../Models/user.model';
 
 @Component({
   selector: 'app-register',
@@ -8,16 +9,18 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
+  user: UserModel;
   form: FormGroup;
-  user = {
-    name: '',
-  };
 
   constructor(private fb: FormBuilder, private validators: ValidatorsService) {
     this.createForm();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.user = new UserModel();
+
+    this.user.email = 'carlos@ulex.es';
+  }
 
   get nameNotValid() {
     return this.form.get('name').invalid && this.form.get('name').touched;

@@ -36,6 +36,7 @@
                 <input
                   type="email"
                   class="form-control form-control-sm"
+                  [(ngModel)]='user.email'
                   placeholder="E-mail Address"
                   formControlName="email"
                   [class.is-invalid]="emailNotValid"

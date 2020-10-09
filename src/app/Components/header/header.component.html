@@ -22,7 +22,8 @@
       </ul>
       <ul class="navbar-nav ml-auto">
         <li>
-          <button class="btn btn-secondary" routerLink="/login">Log In</button>
+          <button (click)="auth.loginWithRedirect()" class="btn btn-secondary" routerLink="/login">Log in</button>
+          <button class="btn btn-danger" routerLink="/login">Log out</button>
         </li>
       </ul>
     </div>
