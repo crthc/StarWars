@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserModel } from '../../Models/user.model';
+import { AuthService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,7 @@ export class LoginComponent implements OnInit {
   user: UserModel = new UserModel();
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private auth: AuthService) {
     this.createForm();
   }
 
@@ -54,7 +55,13 @@ export class LoginComponent implements OnInit {
         control.markAsTouched();
       });
     }
-    console.log(this.form);
-    console.log(this.user);
+    this.auth.login(this.user).subscribe(
+      (resp) => {
+        console.log(resp);
+      },
+      (err) => {
+        console.log(err.error.message);
+      }
+    );
   }
 }

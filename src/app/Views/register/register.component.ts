@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserModel } from '../../Models/user.model';
+import { AuthService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +12,7 @@ export class RegisterComponent implements OnInit {
   user: UserModel;
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private auth: AuthService) {
     this.createForm();
   }
 
@@ -70,7 +71,13 @@ export class RegisterComponent implements OnInit {
       });
     }
 
-    console.log(this.user);
-    console.log(this.form);
+    this.auth.newUser(this.user).subscribe(
+      (resp) => {
+        console.log(resp);
+      },
+      (err) => {
+        console.log(err.error.error.message);
+      }
+    );
   }
 }
