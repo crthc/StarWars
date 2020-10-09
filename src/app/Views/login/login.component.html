@@ -12,6 +12,7 @@
                   class="form-control form-control-sm"
                   placeholder="E-mail Address"
                   formControlName="email"
+                  [(ngModel)]='user.email'
                   [class.is-invalid]="emailNotValid"
                 />
                 <small *ngIf="emailNotValid" class="text-danger"
@@ -24,6 +25,7 @@
                   placeholder="Password"
                   class="form-control form-control-sm mb-2"
                   formControlName="password"
+                  [(ngModel)]='user.password'
                   [class.is-invalid]="passwordNotValid"
                 />
                 <small *ngIf="passwordNotValid" class="text-danger"

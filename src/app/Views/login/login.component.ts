@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UserModel } from '../../Models/user.model';
 
 @Component({
   selector: 'app-login',
@@ -8,6 +9,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  user: UserModel = new UserModel();
   form: FormGroup;
 
   constructor(private fb: FormBuilder) {
@@ -47,12 +49,12 @@ export class LoginComponent implements OnInit {
   }
 
   sign() {
-    console.log(this.form);
-
     if (this.form.invalid) {
       return Object.values(this.form.controls).forEach((control) => {
         control.markAsTouched();
       });
     }
+    console.log(this.form);
+    console.log(this.user);
   }
 }

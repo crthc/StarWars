@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ValidatorsService } from '../../Services/validators.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UserModel } from '../../Models/user.model';
 
@@ -12,7 +11,7 @@ export class RegisterComponent implements OnInit {
   user: UserModel;
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private validators: ValidatorsService) {
+  constructor(private fb: FormBuilder) {
     this.createForm();
   }
 
@@ -42,58 +41,36 @@ export class RegisterComponent implements OnInit {
     );
   }
 
-  get confirmPasswordNotValid() {
-    const password = this.form.get('password').value;
-    const confirmPassword = this.form.get('confirmPassword').value;
-
-    return password === confirmPassword ? false : true;
-  }
-
   createForm() {
-    this.form = this.fb.group(
-      {
-        lastName: ['', [Validators.required, Validators.minLength(2)]],
-        name: ['', [Validators.required, Validators.minLength(2)]],
-        email: [
-          '',
-          [
-            Validators.required,
-            Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$'),
-          ],
+    this.form = this.fb.group({
+      lastName: ['', [Validators.required, Validators.minLength(2)]],
+      name: ['', [Validators.required, Validators.minLength(2)]],
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$'),
         ],
-        password: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(8),
-            Validators.maxLength(20),
-          ],
+      ],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(8),
+          Validators.maxLength(20),
         ],
-        confirmPassword: [
-          '',
-          [
-            Validators.required,
-            Validators.minLength(8),
-            Validators.maxLength(20),
-          ],
-        ],
-      },
-      {
-        validators: this.validators.samePasswords(
-          'password',
-          'confirmPassword'
-        ),
-      }
-    );
+      ],
+    });
   }
 
   sign() {
-    console.log(this.form);
-
     if (this.form.invalid) {
       return Object.values(this.form.controls).forEach((control) => {
         control.markAsTouched();
       });
     }
+
+    console.log(this.user);
+    console.log(this.form);
   }
 }
