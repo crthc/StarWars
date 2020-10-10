@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+
 import { UserModel } from '../../Models/user.model';
 import { AuthService } from '../../Services/auth.service';
 import Swal from 'sweetalert2';
@@ -14,7 +16,11 @@ export class LoginComponent implements OnInit {
   user: UserModel = new UserModel();
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private auth: AuthService) {
+  constructor(
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private router: Router
+  ) {
     this.createForm();
   }
 
@@ -68,6 +74,7 @@ export class LoginComponent implements OnInit {
       (resp) => {
         console.log(resp);
         Swal.close();
+        this.router.navigateByUrl('/starships');
       },
       (err) => {
         console.log(err.error.error.message);
