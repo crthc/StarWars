@@ -4,7 +4,7 @@
   <!--<button (click)="getShips()" class="btn btn-danger">Get starships</button>-->
 
   <div class="row" *ngIf="!loading">
-    <div class="col-md-4">Sorry, something went wrong...</div>
+    <div class="col-md-4">waiting...</div>
     <br>
     <div class="row">
       <div class="col-md-12">
@@ -12,8 +12,9 @@
       </div>
     </div>
   </div>
-
+  
   <div *ngIf="loading">
+    <button *ngIf="auth.userToken" (click)='out()' class="btn btn-danger">Log out</button>
   <table class="table table-striped">
     <thead>
       <tr>

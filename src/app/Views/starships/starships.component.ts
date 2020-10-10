@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ShipsService } from '../../Services/ships.service';
+import { AuthService } from '../../Services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-starships',
@@ -12,7 +14,11 @@ export class StarshipsComponent implements OnInit {
   totalRecords: String;
   page: Number = 1;
 
-  constructor(private ships: ShipsService) {
+  constructor(
+    private ships: ShipsService,
+    public auth: AuthService,
+    private router: Router
+  ) {
     this.data = new Array<any>();
   }
 
@@ -31,5 +37,10 @@ export class StarshipsComponent implements OnInit {
       this.data = data.results;
       this.totalRecords = data.results.length;
     });
+  }
+
+  out() {
+    this.auth.logout();
+    this.router.navigateByUrl('/login');
   }
 }

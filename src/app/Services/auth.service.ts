@@ -24,7 +24,9 @@ export class AuthService {
     this.readToken();
   }
 
-  logout() {}
+  logout() {
+    localStorage.removeItem('token');
+  }
 
   login(user: UserModel) {
     const authData = {
