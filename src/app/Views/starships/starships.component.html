@@ -1,52 +1,41 @@
 
-<div class="container fluid mt-4">
-
-  <!--<button (click)="getShips()" class="btn btn-danger">Get starships</button>-->
-
-  <div class="row" *ngIf="!loading">
-    <div class="col-md-4">waiting...</div>
-    <br>
+  <div class="container fluid mt-4" [formGroup]="filterForm">
+    <div class="row ">
+      <div class="col-12 d-flex justify-content-end"><button *ngIf="auth.userToken" (click)='out()' class="btn btn-danger">Log out</button></div>
+    </div>
+    
     <div class="row">
-      <div class="col-md-12">
-        
+     <div class="col-4">
+        <input class="form-control mr-sm-2" formControlName="search"  type="search" placeholder="Search by ship name" aria-label="Search">
       </div>
     </div>
-  </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Model</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+        *ngFor="let ship of (page | async)?.results" [ngClass]="{'ship': true}| paginate
+        : {
+            id: 'listing_pagination',
+            itemsPerPage: 10,
+            currentPage: page,
+            totalItems: totalRecords
+          }">
+          <td>{{ ship.name }}</td>
+          <td>{{ ship.model }}</td>
+        </tr>
+      </tbody>
+    </table>
   
-  <div *ngIf="loading">
-    <button *ngIf="auth.userToken" (click)='out()' class="btn btn-danger">Log out</button>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Model</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        *ngFor="
-          let ship of data
-            | paginate
-              : {
-                  id: 'listing_pagination',
-                  itemsPerPage: 10,
-                  currentPage: page,
-                  totalItems: totalRecords
-                }
-        "
-      >
-        <td>{{ ship.name }}</td>
-        <td>{{ ship.model }}</td>
-      </tr>
-    </tbody>
-  </table>
-  <div>
-    <pagination-controls
-      id="listing_pagination"
-      maxSize="5"
-      directionLinks="true"
-      (pageChange)="page = $event"
-    ></pagination-controls>
+    <app-paginator [page]="page | async" (pageChange)="onPageChanged($event)"></app-paginator>
   </div>
-</div>
-</div>
+
+
+
+
+
+

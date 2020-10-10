@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ShipsService } from '../../Services/ships.service';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Observable, Subject, merge } from 'rxjs';
+import { debounceTime, map, share, startWith, switchMap } from 'rxjs/operators';
+
+import { Page } from '../../Models/paginationPage';
+
+import { Ship, ShipsService } from '../../Services/ships.service';
+
 import { AuthService } from '../../Services/auth.service';
 import { Router } from '@angular/router';
 
@@ -8,35 +15,33 @@ import { Router } from '@angular/router';
   templateUrl: './starships.component.html',
   styleUrls: ['./starships.component.css'],
 })
-export class StarshipsComponent implements OnInit {
-  loading = false;
-  data: Array<any>;
+export class StarshipsComponent {
+  filterForm: FormGroup;
+  page: Observable<Page<Ship>>;
+  pageUrl = new Subject<string>();
   totalRecords: String;
-  page: Number = 1;
 
   constructor(
-    private ships: ShipsService,
+    private shipService: ShipsService,
     public auth: AuthService,
     private router: Router
   ) {
-    this.data = new Array<any>();
+    this.filterForm = new FormGroup({
+      search: new FormControl(),
+    });
+
+    const filterValue = this.filterForm.valueChanges.pipe(
+      debounceTime(200),
+      startWith(this.filterForm.value)
+    );
+    this.page = merge(filterValue, this.pageUrl).pipe(
+      switchMap((urlOrFilter) => this.shipService.list(urlOrFilter)),
+      share()
+    );
   }
 
-  getShips() {
-    this.ships.getData().subscribe((data) => {
-      console.log(data);
-      this.data = data.results;
-      this.totalRecords = data.results.length;
-    });
-  }
-
-  ngOnInit(): void {
-    this.ships.getData().subscribe((data) => {
-      console.log(data);
-      this.loading = true;
-      this.data = data.results;
-      this.totalRecords = data.results.length;
-    });
+  onPageChanged(url: string) {
+    this.pageUrl.next(url);
   }
 
   out() {

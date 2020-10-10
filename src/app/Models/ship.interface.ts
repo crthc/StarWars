@@ -1,4 +1,5 @@
 export interface Ship {
+  id: number;
   mglt: string;
   cargo_capacity: number;
   consumables: string;

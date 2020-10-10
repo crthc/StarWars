@@ -10,7 +10,7 @@ import { AuthGuard } from '../../guards/auth.guard';
 })
 export class HeaderComponent implements OnInit {
   constructor(
-    public auth: AuthService,
+    private auth: AuthService,
     private router: Router,
     private guard: AuthGuard
   ) {}

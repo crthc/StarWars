@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'recover', component: RecoverComponent },
   { path: 'register', component: RegisterComponent },
+
   {
     path: 'starships',
     component: StarshipsComponent,

@@ -14,6 +14,7 @@ import { RecoverComponent } from './Views/recover/recover.component';
 import { RegisterComponent } from './Views/register/register.component';
 import { StarshipsComponent } from './Views/starships/starships.component';
 import { AuthModule } from '@auth0/auth0-angular';
+import { PaginatorComponent } from './Views/paginator/paginator.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,8 @@ import { AuthModule } from '@auth0/auth0-angular';
     RecoverComponent,
     RegisterComponent,
     StarshipsComponent,
+
+    PaginatorComponent,
   ],
   imports: [
     BrowserModule,

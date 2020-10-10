@@ -1,0 +1,7 @@
+<div class="container" >
+  <button class="btn btn-secondary" (click)="pageChange.emit(page.previous)" [disabled]="!page.previous">&lsaquo;</button>
+  <span>
+    {{ page.count }} starships
+  </span>
+  <button class="btn btn-secondary" (click)="pageChange.emit(page.next)" [disabled]="!page.next">&rsaquo;</button>
+</div>
