@@ -19,24 +19,7 @@
                   >Enter a valid e-mail</small
                 >
               </div>
-              <div class="form-group">
-                <input
-                  type="password"
-                  placeholder="Password"
-                  class="form-control form-control-sm mb-2"
-                  formControlName="password"
-                  [(ngModel)]='user.password'
-                  [class.is-invalid]="passwordNotValid"
-                />
-                <small *ngIf="passwordNotValid" class="text-danger"
-                  >Password must be between 8 minimum and 20 maximum
-                  characters</small
-                >
-                <a class="mb-3 float-right" routerLink="/recover"
-                  >Forgot password?</a
-                >
-              </div>
-
+              
               <button
                 id="submit-button"
                 type="submit"
