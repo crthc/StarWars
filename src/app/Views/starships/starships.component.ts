@@ -4,7 +4,6 @@ import { Observable, Subject, merge } from 'rxjs';
 import { debounceTime, map, share, startWith, switchMap } from 'rxjs/operators';
 
 import { Page } from '../../Models/paginationPage';
-
 import { Ship, ShipsService } from '../../Services/ships.service';
 
 import { AuthService } from '../../Services/auth.service';
@@ -13,7 +12,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-starships',
   templateUrl: './starships.component.html',
-  styleUrls: ['./starships.component.css'],
+  styleUrls: ['./starships.component.scss'],
 })
 export class StarshipsComponent {
   filterForm: FormGroup;

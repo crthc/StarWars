@@ -14,6 +14,7 @@ import { RegisterComponent } from './Views/register/register.component';
 import { StarshipsComponent } from './Views/starships/starships.component';
 import { AuthModule } from '@auth0/auth0-angular';
 import { PaginatorComponent } from './Views/paginator/paginator.component';
+import { ShipDetailComponent } from './Views/ship-detail/ship-detail.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,8 @@ import { PaginatorComponent } from './Views/paginator/paginator.component';
     StarshipsComponent,
 
     PaginatorComponent,
+
+    ShipDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +39,7 @@ import { PaginatorComponent } from './Views/paginator/paginator.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+
     HttpClientModule,
     NgxPaginationModule,
   ],

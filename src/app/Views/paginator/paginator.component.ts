@@ -4,7 +4,7 @@ import { Page } from '../../Models/paginationPage';
 @Component({
   selector: 'app-paginator',
   templateUrl: './paginator.component.html',
-  styleUrls: ['./paginator.component.css'],
+  styleUrls: ['./paginator.component.scss'],
 })
 export class PaginatorComponent {
   @Input() page: Page<any>;

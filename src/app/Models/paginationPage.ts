@@ -17,10 +17,8 @@ export function queryPaginated<T>(
   let url = baseUrl;
 
   if (typeof urlOrFilter === 'string') {
-    // we were given a page URL, use it
     url = urlOrFilter;
   } else if (typeof urlOrFilter === 'object') {
-    // we were given filtering criteria, build the query string
     Object.keys(urlOrFilter)
       .sort()
       .forEach((key) => {

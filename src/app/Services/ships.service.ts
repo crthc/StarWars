@@ -30,6 +30,8 @@ export class Ship {
   providedIn: 'root',
 })
 export class ShipsService {
+  private ship: Ship[];
+
   baseUrl = 'https://swapi.dev/api/starships/';
 
   constructor(private http: HttpClient) {}
@@ -38,17 +40,3 @@ export class ShipsService {
     return queryPaginated<Ship>(this.http, this.baseUrl, urlOrFilter);
   }
 }
-
-/** 
-  constructor(private http: HttpClient) {}
-
-  getData(): Observable<any> {
-    const url = 'https://swapi.dev/api/starships/';
-    return this.http.get<any[]>(url);
-  }
-
-  getDataIndex(idx: string): Observable<any> {
-    const url = 'https://swapi.dev/api/starships/';
-    return this.http.get<any[]>(url)[idx];
-  }
-  */
