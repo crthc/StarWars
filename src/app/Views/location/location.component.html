@@ -1,0 +1,24 @@
+<div class="container-fluid mt-5 map-container">
+	<div class="row">
+		<div class="col-3">
+			<div class="row mt-5 locationInfo">
+				<div class="col-6 d-flex justify-content-end">
+					<img src="assets/marker-icon.png" class="icon img-fluid" />
+				</div>
+				<h4 class="col-6 text-dark display-4">
+					Massimo Duti store<br /><br />Paseo de Gracia, 80 Barcelona, 08008 Spain
+				</h4>
+			</div>
+		</div>
+		<div class="col-7">
+			<div class="row align-items-center justify-content-center map-frame">
+				<div
+					id="map"
+					leaflet
+					(leafletMapReady)="onMapReady($event)"
+					[leafletOptions]="mapOptions"
+				></div>
+			</div>
+		</div>
+	</div>
+</div>

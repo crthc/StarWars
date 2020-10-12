@@ -6,6 +6,7 @@ import { LoginComponent } from './Views/login/login.component';
 import { RegisterComponent } from './Views/register/register.component';
 import { StarshipsComponent } from './Views/starships/starships.component';
 import { ShipDetailComponent } from './Views/ship-detail/ship-detail.component';
+import { LocationComponent } from './Views/location/location.component';
 import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'shipDetail', component: ShipDetailComponent },
+  { path: 'location', component: LocationComponent },
 
   {
     path: 'starships',

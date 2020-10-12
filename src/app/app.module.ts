@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,7 @@ import { StarshipsComponent } from './Views/starships/starships.component';
 import { AuthModule } from '@auth0/auth0-angular';
 import { PaginatorComponent } from './Views/paginator/paginator.component';
 import { ShipDetailComponent } from './Views/ship-detail/ship-detail.component';
+import { LocationComponent } from './Views/location/location.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { ShipDetailComponent } from './Views/ship-detail/ship-detail.component';
     PaginatorComponent,
 
     ShipDetailComponent,
+
+    LocationComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,9 +43,9 @@ import { ShipDetailComponent } from './Views/ship-detail/ship-detail.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-
     HttpClientModule,
     NgxPaginationModule,
+    LeafletModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
