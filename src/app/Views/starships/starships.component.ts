@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
 import { Observable, Subject, merge } from 'rxjs';
 import { debounceTime, map, share, startWith, switchMap } from 'rxjs/operators';
 
-import { Page } from '../../Models/paginationPage';
+import { LoadShip } from '../../Models/loadShip.interface';
 import { Ship, ShipsService } from '../../Services/ships.service';
 
 import { AuthService } from '../../Services/auth.service';
@@ -14,33 +13,63 @@ import { Router } from '@angular/router';
   templateUrl: './starships.component.html',
   styleUrls: ['./starships.component.scss'],
 })
-export class StarshipsComponent {
-  filterForm: FormGroup;
-  page: Observable<Page<Ship>>;
-  pageUrl = new Subject<string>();
-  totalRecords: String;
+export class StarshipsComponent implements OnInit {
+  public totalShips: number = 1;
+  public ships: Ship[] = [];
+  public page: number = 1;
+  public visuals: any[] = [];
+  private url: any[] = [];
 
   constructor(
     private shipService: ShipsService,
     public auth: AuthService,
     private router: Router
-  ) {
-    this.filterForm = new FormGroup({
-      search: new FormControl(),
-    });
+  ) {}
 
-    const filterValue = this.filterForm.valueChanges.pipe(
-      debounceTime(200),
-      startWith(this.filterForm.value)
-    );
-    this.page = merge(filterValue, this.pageUrl).pipe(
-      switchMap((urlOrFilter) => this.shipService.list(urlOrFilter)),
-      share()
-    );
+  ngOnInit(): void {
+    this.loadShips();
+    this.loadImg();
   }
 
-  onPageChanged(url: string) {
-    this.pageUrl.next(url);
+  loadShips() {
+    this.shipService.loadShips(this.page).subscribe(({ count, results }) => {
+      this.totalShips = count;
+      this.ships = results;
+    });
+  }
+
+  loadImg() {
+    this.shipService.loadShips(1).subscribe((resp) => {
+      this.url.push(resp.results);
+
+      for (let ship of this.ships) {
+        this.visuals.push(
+          'https://starwars-visualguide.com/assets/img/starships/' +
+            ship.url.replace(/\D/g, '') +
+            '.jpg'
+        );
+      }
+    });
+    console.log(this.visuals);
+  }
+
+  onPageChanged(value: number) {
+    this.page += value;
+
+    if (this.page < 1) {
+      this.page = 1;
+    } else if (this.page > 4) {
+      this.page -= value;
+    }
+
+    this.loadShips();
+
+    const loadVisuals = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve((this.visuals = []));
+      }, 10);
+    });
+    loadVisuals.then((imagenes) => this.loadImg());
   }
 
   out() {

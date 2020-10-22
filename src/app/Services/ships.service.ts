@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Page, queryPaginated } from '../Models/paginationPage';
+import { LoadShip } from '../Models/loadShip.interface';
+
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
@@ -24,6 +25,7 @@ export class Ship {
   pilots: [];
   starship_class: string;
   url: string;
+  img: string = `https://starwars-visualguide.com/assets/img/starships/`;
 }
 
 @Injectable({
@@ -33,10 +35,17 @@ export class ShipsService {
   private ship: Ship[];
 
   baseUrl = 'https://swapi.dev/api/starships/';
+  imgUrl = 'https://starwars-visualguide.com/assets/img/starships/';
 
   constructor(private http: HttpClient) {}
 
-  list(urlOrFilter?: string | object): Observable<Page<Ship>> {
-    return queryPaginated<Ship>(this.http, this.baseUrl, urlOrFilter);
+  loadShips(page: number = 1) {
+    const url = `${this.baseUrl}?page=${page}`;
+    return this.http.get<LoadShip>(url);
+  }
+
+  loadImg(page: number = 5) {
+    const url = `${this.imgUrl}${page}.jpg`;
+    return this.http.get<LoadShip>(url);
   }
 }

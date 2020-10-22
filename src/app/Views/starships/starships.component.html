@@ -1,42 +1,63 @@
-
-  <div class="container fluid mt-4" [formGroup]="filterForm">
-    <div class="row ">
-      <div class="col-12 d-flex justify-content-end"><button *ngIf="auth.userToken" (click)='out()' class="btn btn-danger">Log out</button></div>
+<div class="container-fluid">
+  <div class="row pt-4">
+    <div class="col-11 d-flex justify-content-end"><button *ngIf="auth.userToken" (click)='out()' class="btn btn-danger">Log out</button>
     </div>
-    
-    <div class="row">
-     <div class="col-4">
-        <input class="form-control mr-sm-2" formControlName="search"  type="search" placeholder="Search by ship name" aria-label="Search">
+  </div>
+  <div class="row">
+    <div class="col-4 d-flex justify-content-center">
+      <h4>Total Starships ({{totalShips}})</h4>
+    </div>
+  </div>
+    <div class="row d-flex justify-content-center">
+      <div class="col-2">
+        <div class="table-responsive">
+          <table class="table table-striped">
+              <thead>
+                  <tr>
+                      <th class="w100">Image</th>
+                  </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let visual of visuals" class="height">
+                  <td><img [src]="visual" onerror="this.src='/assets/images/notFound2.jpg';" alt="" class="height img-fluid"></td>
+                </tr>
+              </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-8">
+          <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="w100">Name</th>
+                        <th class="w100">Model</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <tr
+                  *ngFor="let ship of ships" class="height2">
+                        <td>{{ ship.name }}</td>
+                        <td>{{ ship.model }}</td>
+                    </tr>
+                </tbody>
+            </table>
+          </div>
       </div>
     </div>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Model</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-        *ngFor="let ship of (page | async)?.results" [ngClass]="{'ship': true}| paginate
-        : {
-            id: 'listing_pagination',
-            itemsPerPage: 10,
-            currentPage: page,
-            totalItems: totalRecords
-          }">
-          <td>{{ ship.name }}</td>
-          <td>{{ ship.model }}</td>
-        </tr>
-      </tbody>
-    </table>
-
-
-    <app-paginator [page]="page | async" (pageChange)="onPageChanged($event)"></app-paginator>
+  <div class="row">
+    <div class="col-4 d-flex justify-content-center">
+        <button (click)="onPageChanged(-1)" class="btn btn-secondary">Previous</button>
+        &nbsp;
+        <span>
+          {{page}} / 4
+        </span>
+        &nbsp;
+        <button (click)="onPageChanged(1)" class="btn btn-secondary">Next</button>
+    </div>
   </div>
+</div>
 
-
-
-
+ 
 
 

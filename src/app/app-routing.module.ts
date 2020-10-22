@@ -5,7 +5,6 @@ import { HomeComponent } from './Views/home/home.component';
 import { LoginComponent } from './Views/login/login.component';
 import { RegisterComponent } from './Views/register/register.component';
 import { StarshipsComponent } from './Views/starships/starships.component';
-import { ShipDetailComponent } from './Views/ship-detail/ship-detail.component';
 import { LocationComponent } from './Views/location/location.component';
 import { AuthGuard } from './guards/auth.guard';
 
@@ -13,7 +12,6 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'shipDetail', component: ShipDetailComponent },
   { path: 'location', component: LocationComponent },
 
   {

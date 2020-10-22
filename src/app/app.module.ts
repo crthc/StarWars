@@ -14,8 +14,6 @@ import { LoginComponent } from './Views/login/login.component';
 import { RegisterComponent } from './Views/register/register.component';
 import { StarshipsComponent } from './Views/starships/starships.component';
 import { AuthModule } from '@auth0/auth0-angular';
-import { PaginatorComponent } from './Views/paginator/paginator.component';
-import { ShipDetailComponent } from './Views/ship-detail/ship-detail.component';
 import { LocationComponent } from './Views/location/location.component';
 
 @NgModule({
@@ -27,10 +25,6 @@ import { LocationComponent } from './Views/location/location.component';
     LoginComponent,
     RegisterComponent,
     StarshipsComponent,
-
-    PaginatorComponent,
-
-    ShipDetailComponent,
 
     LocationComponent,
   ],
